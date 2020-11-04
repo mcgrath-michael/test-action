@@ -1,0 +1,11 @@
+name: test-action
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: |
+          echo "1 ${GITHUB_WORKFLOW} 2 ${{ env.GITHUB_WORKFLOW }} 3 $GITHUB_WORKFLOW"
