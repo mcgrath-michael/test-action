@@ -1,6 +1,10 @@
 name: test-action
 on:
   workflow_dispatch:
+    inputs:
+      custom_tag:
+        description: Set custom image tag
+        required: false
 
 jobs:
   build:
@@ -9,3 +13,7 @@ jobs:
       - name: test
         run: |
           echo "1 ${GITHUB_WORKFLOW} 2 ${{ env.GITHUB_WORKFLOW }} 3 $GITHUB_WORKFLOW"
+      - name: test2
+        if: ${{ github.event.inputs.custom_tag != '' }}
+        run: |
+          echo "IF STATEMENT WAS TRUE"
