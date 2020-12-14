@@ -6,11 +6,40 @@ on:
         description: Qt version
         required: false
         default: '5.15.2'
+      qt_version_nodefault:
+        description: Qt version
+        required: false
 jobs:
   build:
     runs-on: [self-hosted]
     env:
       QT_VERSION: ${${{ github.event.inputs.qt_version }}-5.16.0}
+    steps:
+      - name: echo QT_VERSION
+        run: |
+          echo "$QT_VERSION"
+  build2-quoted:
+    runs-on: [self-hosted]
+    env:
+      QT_VERSION: "${${{ github.event.inputs.qt_version }}-5.16.0}"
+    steps:
+      - name: echo QT_VERSION
+        run: |
+          echo "$QT_VERSION"
+  build3-expansion:
+    runs-on: [self-hosted]
+    env:
+      QT_VERSION_INPUT: ${{ github.event.inputs.qt_version }}
+      QT_VERSION: ${QT_VERSION_INPUT-5.16.0}
+    steps:
+      - name: echo QT_VERSION
+        run: |
+          echo "$QT_VERSION"
+  build4-expansion-nodefault:
+    runs-on: [self-hosted]
+    env:
+      QT_VERSION_INPUT: ${{ github.event.inputs.qt_version_nodefault }}
+      QT_VERSION: ${QT_VERSION_INPUT-5.16.0}
     steps:
       - name: echo QT_VERSION
         run: |
