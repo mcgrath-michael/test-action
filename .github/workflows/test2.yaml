@@ -21,7 +21,7 @@ jobs:
   build2-quoted:
     runs-on: [self-hosted]
     env:
-      QT_VERSION: "${${{ github.event.inputs.qt_version }}-5.16.0}"
+      QT_VERSION: "${${{ github.event.inputs.qt_version }}:-5.16.0}"
     steps:
       - name: echo QT_VERSION
         run: |
@@ -30,7 +30,7 @@ jobs:
     runs-on: [self-hosted]
     env:
       QT_VERSION_INPUT: ${{ github.event.inputs.qt_version }}
-      QT_VERSION: ${QT_VERSION_INPUT-5.16.0}
+      QT_VERSION: ${QT_VERSION_INPUT:-5.16.0}
     steps:
       - name: echo QT_VERSION
         run: |
@@ -39,7 +39,7 @@ jobs:
     runs-on: [self-hosted]
     env:
       QT_VERSION_INPUT: ${{ github.event.inputs.qt_version_nodefault }}
-      QT_VERSION: ${QT_VERSION_INPUT-5.16.0}
+      QT_VERSION: ${QT_VERSION_INPUT:-5.16.0}
     steps:
       - name: echo QT_VERSION
         run: |
@@ -48,7 +48,7 @@ jobs:
     runs-on: [self-hosted]
     env:
       QT_VERSION_INPUT: ${{ github.event.inputs.qt_version_nodefault }}
-      QT_VERSION: "${QT_VERSION_INPUT-5.16.0}"
+      QT_VERSION: "${QT_VERSION_INPUT:-5.16.0}"
     steps:
       - name: echo QT_VERSION
         run: |
