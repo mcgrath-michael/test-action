@@ -1,0 +1,17 @@
+name: test posix expansion
+on:
+  workflow_dispatch:
+    inputs:
+      qt_version:
+        description: Qt version
+        required: false
+        default: '5.15.2'
+jobs:
+  build:
+    runs-on: [self-hosted]
+    env:
+      QT_VERSION: ${${{ github.event.inputs.qt_version }}-5.16.0}
+    steps:
+      - name: echo QT_VERSION
+        run: |
+          echo "$QT_VERSION"
